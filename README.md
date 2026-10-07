@@ -2,6 +2,8 @@
 
 An open status protocol for coding agents, plus a small CLI that writes and reads it: see at a glance which of your Claude Code (or any other agent) sessions is working, which one needs you, and which one is idle.
 
+<img src="docs/panel.png" alt="The floating panel: one session needs you, two are working, two are idle" width="306">
+
 The panel is macOS-only. The protocol and CLI also build on Linux.
 
 ## Install
