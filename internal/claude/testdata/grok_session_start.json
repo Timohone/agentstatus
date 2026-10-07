@@ -1,0 +1,9 @@
+{
+  "_source": "docs",
+  "sessionId": "01a112cd-0000-7000-8000-000000000001",
+  "hookEventName": "session_start",
+  "cwd": "/tmp/probe",
+  "workspaceRoot": "/tmp/probe",
+  "permissionMode": "default",
+  "source": "startup"
+}

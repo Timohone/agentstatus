@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Timohone/agentstatus/schema/session.v1.json",
+  "title": "agentstatus session v1",
+  "type": "object",
+  "required": ["v", "agent", "id", "status", "updated"],
+  "properties": {
+    "v":       { "const": 1 },
+    "agent":   { "type": "string", "pattern": "^[A-Za-z0-9._-]{1,128}$", "not": { "enum": [".", ".."] } },
+    "id":      { "type": "string", "pattern": "^[A-Za-z0-9._-]{1,128}$", "not": { "enum": [".", ".."] } },
+    "status":  { "enum": ["working", "waiting", "idle", "error"] },
+    "updated": { "type": "string", "format": "date-time" },
+    "since":   { "type": "string", "format": "date-time" },
+    "cwd":     { "type": "string" },
+    "title":   { "type": "string" },
+    "pid":     { "type": "integer", "minimum": 1, "maximum": 2147483647 },
+    "topic":   { "type": "string", "maxLength": 120 },
+    "detail":  { "type": "string", "maxLength": 200 }
+  },
+  "additionalProperties": true
+}

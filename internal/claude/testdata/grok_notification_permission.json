@@ -1,0 +1,10 @@
+{
+  "_source": "docs",
+  "sessionId": "01a112cd-0000-7000-8000-000000000001",
+  "hookEventName": "notification",
+  "cwd": "/tmp/probe",
+  "workspaceRoot": "/tmp/probe",
+  "permissionMode": "default",
+  "notification_type": "permission_prompt",
+  "message": "Grok needs your permission to use run_command"
+}

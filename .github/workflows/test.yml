@@ -1,0 +1,27 @@
+name: Tests
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+      - name: Check Go version
+        run: go version
+      - name: Vet Go code
+        run: go vet ./...
+      - name: Test Go
+        run: go test ./...
+      - name: Check Swift version
+        run: swift --version
+      - name: Build and test Swift package
+        run: cd panel && swift build && swift test

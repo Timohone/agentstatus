@@ -1,0 +1,28 @@
+cask "agentstatus" do
+  version "@VERSION@"
+  sha256 "@SHA256@"
+
+  url "https://github.com/Timohone/agentstatus/releases/download/v#{version}/AgentStatus-#{version}.zip"
+  name "AgentStatus"
+  desc "Menu bar panel showing what your coding agents are doing"
+  homepage "https://github.com/Timohone/agentstatus"
+
+  depends_on macos: ">= :sonoma"
+
+  app "AgentStatus.app"
+  binary "#{appdir}/AgentStatus.app/Contents/Helpers/agentstatus"
+
+  uninstall quit:      "com.timohone.agentstatus",
+            launchctl: "com.timohone.agentstatus"
+
+  zap trash: [
+    "~/.agentstatus",
+    "~/Library/LaunchAgents/com.timohone.agentstatus.plist",
+    "~/Library/Preferences/com.timohone.agentstatus.plist",
+  ]
+
+  caveats <<~EOS
+    Run `agentstatus setup` to connect your agents.
+    Before uninstalling: `agentstatus setup --remove`.
+  EOS
+end

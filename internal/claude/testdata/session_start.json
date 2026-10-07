@@ -1,0 +1,7 @@
+{
+  "session_id": "340a0169-e416-4921-a544-b815511f4281",
+  "transcript_path": "/home/user/.claude/projects/-tmp-probe/transcript.jsonl",
+  "cwd": "/tmp/probe",
+  "hook_event_name": "SessionStart",
+  "source": "startup"
+}

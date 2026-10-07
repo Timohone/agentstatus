@@ -1,0 +1,6 @@
+dist/
+.build/
+*.tmp-*
+/agentstatus
+panel/icon/AgentStatus.iconset/
+panel/icon/*.icns

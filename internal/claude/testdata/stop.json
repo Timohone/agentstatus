@@ -1,0 +1,12 @@
+{
+  "session_id": "340a0169-e416-4921-a544-b815511f4281",
+  "transcript_path": "/home/user/.claude/projects/-tmp-probe/transcript.jsonl",
+  "cwd": "/tmp/probe",
+  "prompt_id": "167e9bca-481e-43e7-a3e2-c6ecd99ba328",
+  "permission_mode": "default",
+  "hook_event_name": "Stop",
+  "stop_hook_active": false,
+  "last_assistant_message": "Done.",
+  "background_tasks": [],
+  "session_crons": []
+}
