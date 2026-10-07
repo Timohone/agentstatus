@@ -9,7 +9,8 @@ The panel is macOS-only. The protocol and CLI also build on Linux.
 macOS 14 or later, Apple Silicon and Intel.
 
 ```sh
-brew install --cask timohone/tap/agentstatus
+brew tap timohone/agentstatus https://github.com/Timohone/agentstatus
+brew install --cask timohone/agentstatus/agentstatus
 agentstatus setup
 ```
 
@@ -74,6 +75,7 @@ agentstatus setup --remove     # all agents at once, or per agent:
 agentstatus uninstall claude
 agentstatus uninstall codex
 brew uninstall --cask agentstatus    # add --zap to also delete settings and ~/.agentstatus
+brew untap timohone/agentstatus
 ```
 
 If `setup` created a settings or hooks file, it stays behind as an empty `{}` after `--remove` (harmless). Grok's own `agentstatus.json` is deleted.

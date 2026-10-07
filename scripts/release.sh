@@ -9,7 +9,6 @@ set -euo pipefail
 
 TEAM=H4MCP94STC
 PROFILE=agentstatus-notary
-TAP="$HOME/Documents/repos/timohone/homebrew-tap"
 
 USAGE="usage: $0 vX.Y.Z [--dry-run] [--check-only] [--publish vX.Y.Z]"
 TAG=""; DRY=0; CHECK=0; PUBLISH=""; CONFTEST=0
@@ -52,8 +51,8 @@ cleanup() {
     case "$STAGE" in
       tagged) echo "release: failed after tagging. Nothing is public. Undo: git tag -d $TAG" >&2 ;;
       pushed) echo "release: main and tag $TAG are PUBLIC, but no GitHub release exists. Next: gh release create $TAG $ZIP --title $TAG --notes-file $NOTES (SHA-256: $SHA)" >&2 ;;
-      released) echo "release: GitHub release $TAG is LIVE, but the tap is not updated. Next: copy $PWD/dist/agentstatus.rb to Casks/agentstatus.rb in $TAP, commit and push." >&2 ;;
-      committed) echo "release: GitHub release $TAG is LIVE and the tap commit exists locally, but it is NOT pushed. Next: git -C $TAP push" >&2 ;;
+      released) echo "release: GitHub release $TAG is LIVE, but the cask is not updated. Next: cp dist/agentstatus.rb Casks/agentstatus.rb, commit and push main." >&2 ;;
+      committed) echo "release: GitHub release $TAG is LIVE and the cask commit exists locally, but it is NOT pushed. Next: git push origin main" >&2 ;;
     esac
   fi
 }
@@ -145,20 +144,14 @@ git tag "$TAG"; STAGE=tagged
 git push --atomic origin main "refs/tags/$TAG"; STAGE=pushed
 gh release create "$TAG" "$ZIP" --title "$TAG" --notes-file "$NOTES"; STAGE=released
 
-if [ -d "$TAP/.git" ] && [ -n "$(git -C "$TAP" status --porcelain)" ]; then
-  echo "Tap clone at $TAP has uncommitted changes; nothing committed. Copy dist/agentstatus.rb to Casks/agentstatus.rb there, commit and push." >&2
-elif [ -d "$TAP/.git" ]; then
-  git -C "$TAP" pull --ff-only
-  mkdir -p "$TAP/Casks"
-  cp dist/agentstatus.rb "$TAP/Casks/agentstatus.rb"
-  git -C "$TAP" add Casks/agentstatus.rb
-  if git -C "$TAP" diff --cached --quiet; then
-    echo "cask unchanged, tap not touched"
-  else
-    git -C "$TAP" commit -m "chore: agentstatus $VER"; STAGE=committed
-    git -C "$TAP" push
-  fi
+# Cask liegt im Repo selbst (Tap = dieses Repo); die Pruefsumme gibt es erst nach dem Build.
+mkdir -p Casks
+cp dist/agentstatus.rb Casks/agentstatus.rb
+git add Casks/agentstatus.rb
+if git diff --cached --quiet; then
+  echo "cask unchanged"
 else
-  echo "Tap clone missing at $TAP. Copy dist/agentstatus.rb to Casks/agentstatus.rb in Timohone/homebrew-tap, commit and push." >&2
+  git commit -m "chore: Cask fuer $TAG"; STAGE=committed
+  git push origin main
 fi
 STAGE=done
