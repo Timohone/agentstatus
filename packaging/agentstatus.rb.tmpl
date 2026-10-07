@@ -7,7 +7,7 @@ cask "agentstatus" do
   desc "Menu bar panel showing what your coding agents are doing"
   homepage "https://github.com/Timohone/agentstatus"
 
-  depends_on macos: ">= :sonoma"
+  depends_on macos: :sonoma
 
   app "AgentStatus.app"
   binary "#{appdir}/AgentStatus.app/Contents/Helpers/agentstatus"
